@@ -22,11 +22,10 @@ Bootstrap LevelMatch project memory and prepare to define MVP product scope and 
 
 ## Next Action
 
-Decide stack: backend language/framework, database, and whether the frontend is part of MVP or deferred.
+Define the LLM extraction schema: what fields to pull from a raw job posting.
 
 ## Open Loops
 
-- Stack not yet chosen (Python backend? Next.js frontend? Database?)
 - LLM extraction schema not defined (what fields to extract from a raw posting)
 - Gap analyzer feature scope not defined (what does "gap" mean relative to user background?)
 
