@@ -4,10 +4,9 @@ import httpx
 
 from levelmatch.config import settings
 
-JSEARCH_BASE_URL = "https://jsearch.p.rapidapi.com"
+JSEARCH_SEARCH_URL = "https://api.openwebninja.com/jsearch/search-v2"
 JSEARCH_HEADERS = {
-    "x-rapidapi-host": "jsearch.p.rapidapi.com",
-    "x-rapidapi-key": settings.jsearch_api_key,
+    "X-API-Key": settings.jsearch_api_key,
 }
 
 
@@ -31,7 +30,7 @@ async def search_jobs(query: str, page: int = 1, num_pages: int = 1) -> list[Raw
 
     async with httpx.AsyncClient() as client:
         response = await client.get(
-            f"{JSEARCH_BASE_URL}/search",
+            JSEARCH_SEARCH_URL,
             headers=JSEARCH_HEADERS,
             params=params,
             timeout=30.0,
@@ -41,7 +40,7 @@ async def search_jobs(query: str, page: int = 1, num_pages: int = 1) -> list[Raw
     data = response.json()
     postings = []
 
-    for item in data.get("data", []):
+    for item in data.get("data", {}).get("jobs", []):
         postings.append(
             RawJobPosting(
                 external_id=item["job_id"],
