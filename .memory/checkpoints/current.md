@@ -16,16 +16,16 @@ Bootstrap LevelMatch project memory and prepare to define MVP product scope and 
 ## Progress
 
 - Scaffolded `.memory/` using Chronelle ontology
-- Recorded goals (land-ai-job, ship-levelmatch-mvp), foundational assumptions, q3-timeline constraint, and levelmatch-is-job-analyzer decision
-- Episode and transition written for this bootstrap session
+- Recorded goals, assumptions, constraints, and levelmatch-is-job-analyzer decision
+- Decided on JSearch (RapidAPI) as primary ingestion API; Adzuna as fallback; US-only MVP scope
+- Alternatives recorded in `.memory/alternatives/data-ingestion-api.md`
 
 ## Next Action
 
-Define LevelMatch product scope and technical architecture: data source for job postings, LLM extraction schema, and initial stack choice.
+Decide stack: backend language/framework, database, and whether the frontend is part of MVP or deferred.
 
 ## Open Loops
 
-- Data pipeline source undecided: scraping vs. API (Adzuna, LinkedIn, etc.) vs. manual paste
 - Stack not yet chosen (Python backend? Next.js frontend? Database?)
 - LLM extraction schema not defined (what fields to extract from a raw posting)
 - Gap analyzer feature scope not defined (what does "gap" mean relative to user background?)
