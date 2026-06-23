@@ -22,11 +22,10 @@ Bootstrap LevelMatch project memory and prepare to define MVP product scope and 
 
 ## Next Action
 
-Define the LLM extraction schema: what fields to pull from a raw job posting.
+Define the gap analyzer: what "gap" means relative to the user's background and what the output looks like.
 
 ## Open Loops
 
-- LLM extraction schema not defined (what fields to extract from a raw posting)
 - Gap analyzer feature scope not defined (what does "gap" mean relative to user background?)
 
 ## Working Context
