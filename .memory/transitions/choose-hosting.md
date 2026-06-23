@@ -1,7 +1,7 @@
 ---
 id: choose-hosting
 type: transition
-episode: define-product-scope
+episode: plan-dashboard
 operation: create
 target_type: decision
 target_id: hosting-decision
