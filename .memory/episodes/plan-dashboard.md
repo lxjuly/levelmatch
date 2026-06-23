@@ -1,7 +1,7 @@
 ---
 id: plan-dashboard
 type: episode
-status: active
+status: completed
 ---
 
 # Plan Dashboard (August Scope)

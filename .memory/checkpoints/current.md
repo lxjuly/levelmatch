@@ -4,40 +4,46 @@ type: checkpoint
 status: handed-off
 actor: Claude
 updated: 2026-06-22
-episode: implement-mvp
+episode: implement-dashboard
 ---
 
 # Current Checkpoint
 
 ## Focus
 
-July MVP complete. August scope is the dashboard and market aggregate view.
+Dashboard shipped. Next: skill normalization, deploy, or extended aggregates.
 
 ## Progress
 
-- Scaffolded Python + FastAPI project with PostgreSQL, Alembic, Docker Compose
-- JSearch ingestion pipeline (OpenWebNinja API, X-API-Key, data.jobs response shape)
-- Claude Haiku extraction pipeline (12-field standard schema, inline at ingest time)
-- Composite gap analyzer: match score, missing skills, seniority fit, role type match, summary
-- All routes verified end-to-end: POST /ingest, GET /jobs, POST /profiles, POST /gap/batch, POST /gap/{job_id}
+- July MVP backend complete (ingestion, extraction, gap analyzer)
+- SvelteKit dashboard built under `web/` (Svelte 5 runes, Cloudflare Pages adapter)
+- Four views: Jobs (list + match scores), Job detail (gap report), Profile, Insights (aggregates)
+- CORS enabled on the API for the SvelteKit dev origin
+- Verified end-to-end in a real browser against the local API (10 ingested postings)
 
 ## Next Action
 
-Scaffold Next.js dashboard for August — main views: job list with gap scores, per-posting gap report detail, aggregate skills chart.
+Pick from the plan's Proposed items: normalize-skills (canonicalize casing/wording),
+deploy-stack (Cloudflare Pages + Railway), or build-market-aggregate (role trends +
+user-relative gaps).
 
 ## Open Loops
 
-- Dashboard not yet started (August scope)
-- Market aggregate view (Option E from gap analyzer alternatives) deferred to August
+- Skill normalization: "Machine Learning" vs "Machine learning" split in aggregates
+- Not yet deployed (Cloudflare Pages + Railway)
 - PYTHONPATH=src workaround for alembic — could be cleaned up with a proper alembic config
 
 ## Working Context
 
-- `src/levelmatch/` — main application
-- `PYTHONPATH=src uv run uvicorn levelmatch.main:app --reload` to start server
-- `PYTHONPATH=src uv run alembic upgrade head` to run migrations
-- `docker compose up -d` to start Postgres
+- `src/levelmatch/` — FastAPI backend; `web/` — SvelteKit dashboard
+- Backend: `PYTHONPATH=src uv run uvicorn levelmatch.main:app --reload`
+- Frontend: `cd web && npm run dev` (Vite on :5173, expects API on :8000)
+- `PYTHONPATH=src uv run alembic upgrade head` for migrations; `docker compose up -d` for Postgres
+- Frontend API base set via `web/.env` PUBLIC_API_BASE
 
 ## Promotion Notes
 
-Episode (implement-mvp) and three transitions (implement-data-pipeline, implement-llm-extraction, implement-gap-analyzer) written. Plan updated — build-dashboard is now active.
+Episode (implement-dashboard) and transition (implement-dashboard) written.
+plan-dashboard episode marked completed. Plan updated: build-dashboard and
+plan-dashboard done; normalize-skills, deploy-stack, and build-market-aggregate
+proposed.

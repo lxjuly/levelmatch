@@ -9,29 +9,61 @@ projection: task-planning
 
 ## Active
 
-### Build dashboard
-
-- id: build-dashboard
-- status: active
-- why: August deliverable; market aggregate view and per-posting gap reports need a frontend surface.
-- next action: Scaffold Next.js app, design the main views (job list + gap report per posting, aggregate skills chart).
-- related memory:
-  - decision: stack-decision
-  - constraint: q3-timeline
+_None — dashboard shipped. Pick the next item from Proposed._
 
 ## Proposed
 
-### Build market aggregate view
+### Normalize skills
+
+- id: normalize-skills
+- status: proposed
+- why: Extraction emits skills with inconsistent casing/wording ("Machine Learning" vs "Machine learning"), which splits aggregates in the Insights view and weakens gap matching.
+- next action: Add a canonicalization pass (lowercase + alias map, or LLM-assisted) at extraction time, and/or aggregate case-insensitively.
+- related memory:
+  - episode: implement-dashboard
+  - decision: llm-extraction-schema-decision
+
+### Deploy to Cloudflare Pages + Railway
+
+- id: deploy-stack
+- status: proposed
+- why: The dashboard and API need to be publicly reachable for the portfolio.
+- next action: Deploy FastAPI + Postgres to Railway, dashboard to Cloudflare Pages, wire CORS + PUBLIC_API_BASE to production origins.
+- related memory:
+  - decision: hosting-decision
+  - constraint: q3-timeline
+
+### Extend market aggregate view
 
 - id: build-market-aggregate
 - status: proposed
-- why: Surface what the market is asking for vs. what the user has across all ingested postings.
-- next action: Aggregate required_skills + role_type frequency queries over job_postings table. Feed into dashboard.
+- why: The Insights view covers skill + tech-stack frequency; a fuller view could add role_type trends and user-relative gaps (market demand vs. the active profile).
+- next action: Add role_type frequency and a "your top missing skills across the market" panel.
 - related memory:
-  - alternatives: gap-analyzer (Option E deferred to August)
-  - constraint: q3-timeline
+  - alternatives: gap-analyzer (Option E)
+  - episode: implement-dashboard
 
 ## Done
+
+### Build dashboard
+
+- id: build-dashboard
+- status: done
+- why: August deliverable; frontend surface for postings, gap reports, and market aggregates.
+- related memory:
+  - episode: implement-dashboard
+  - transition: implement-dashboard
+  - decision: frontend-sveltekit
+  - decision: hosting-decision
+
+### Plan dashboard
+
+- id: plan-dashboard
+- status: done
+- related memory:
+  - episode: plan-dashboard
+  - decision: hosting-decision
+  - decision: frontend-sveltekit
 
 ### Implement gap analyzer
 
