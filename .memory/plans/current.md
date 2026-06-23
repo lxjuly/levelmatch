@@ -9,48 +9,61 @@ projection: task-planning
 
 ## Active
 
-### Define product scope and architecture
-
-- id: define-product-scope
-- status: active
-- why: Repo is empty; before writing code, the data source, LLM extraction schema, stack, and gap analyzer definition need to be decided.
-- next action: Work through the four open loops in the current checkpoint (data source, stack, extraction schema, gap definition).
-- related memory:
-  - goal: ship-levelmatch-mvp
-  - constraint: q3-timeline
-  - checkpoint: current
-
-## Proposed
-
 ### Implement data pipeline
 
 - id: implement-data-pipeline
-- status: proposed
+- status: active
 - why: MVP requires ingesting job postings before anything else can run.
-- next action: Depends on data source decision above.
+- next action: Scaffold Python + FastAPI project, set up PostgreSQL schema, wire up JSearch API ingestion.
 - related memory:
   - goal: ship-levelmatch-mvp
+  - decision: use-jsearch-api
+  - decision: stack-decision
+
+## Proposed
 
 ### Implement LLM extraction
 
 - id: implement-llm-extraction
 - status: proposed
 - why: Raw postings need to become structured records (skills, level, tech stack, compensation) for the gap analyzer to work.
-- next action: Define extraction schema first, then implement.
+- next action: Implement extraction using the standard 12-field schema via Claude API.
 - related memory:
-  - assumption: foundational-assumptions (LLM extraction is sufficient)
+  - decision: llm-extraction-schema-decision
+  - decision: stack-decision
 
-### Build dashboard and gap analyzer
+### Build gap analyzer
 
-- id: build-dashboard-gap-analyzer
+- id: build-gap-analyzer
 - status: proposed
-- why: August deliverable; turns extracted data into a useful product surface.
-- next action: Scope after MVP ships.
+- why: August deliverable; composite gap report per posting powers the core product value.
+- next action: Implement after LLM extraction is stable.
 - related memory:
-  - goal: ship-levelmatch-mvp
+  - decision: gap-analyzer-decision
+  - constraint: q3-timeline
+
+### Build dashboard
+
+- id: build-dashboard
+- status: proposed
+- why: August deliverable; market aggregate view and per-posting gap reports need a frontend surface.
+- next action: Scope after gap analyzer ships. Next.js.
+- related memory:
+  - decision: stack-decision
   - constraint: q3-timeline
 
 ## Done
+
+### Define product scope and architecture
+
+- id: define-product-scope
+- status: done
+- why: All four scope decisions resolved before writing code.
+- related memory:
+  - decision: use-jsearch-api
+  - decision: stack-decision
+  - decision: llm-extraction-schema-decision
+  - decision: gap-analyzer-decision
 
 ### Bootstrap project memory
 

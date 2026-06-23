@@ -22,11 +22,11 @@ Bootstrap LevelMatch project memory and prepare to define MVP product scope and 
 
 ## Next Action
 
-Define the gap analyzer: what "gap" means relative to the user's background and what the output looks like.
+Begin implementation: scaffold the Python + FastAPI project, set up PostgreSQL schema, and wire up the JSearch ingestion pipeline.
 
 ## Open Loops
 
-- Gap analyzer feature scope not defined (what does "gap" mean relative to user background?)
+- None. All scope decisions resolved.
 
 ## Working Context
 
