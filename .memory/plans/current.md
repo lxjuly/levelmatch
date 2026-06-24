@@ -9,23 +9,15 @@ projection: task-planning
 
 ## Active
 
-### Deploy to Cloudflare Pages + Railway
+### Seed production data
 
-- id: deploy-stack
+- id: seed-production-data
 - status: active
-- why: The dashboard and API need to be publicly reachable for the portfolio.
-- next action: Repo is deploy-ready (railway.toml, configurable CORS, asyncpg URL
-  rewrite, DEPLOY.md runbook). Remaining steps need account access:
-  1. Railway: create project, add Postgres plugin, set ANTHROPIC_API_KEY /
-     JSEARCH_API_KEY / CORS_ORIGINS, deploy, capture API URL
-  2. Cloudflare Pages: root `web`, build `npm run build`, output
-     `.svelte-kit/cloudflare`, set PUBLIC_API_BASE to the Railway URL
-  3. Set CORS_ORIGINS to the Pages URL on Railway, redeploy backend
+- why: The live dashboard is empty; a few ingested postings make it a real demo.
+- next action: Run ingest against the production API for 1-2 queries (costs JSearch
+  quota + Claude tokens — confirm with steward before spending).
 - related memory:
-  - decision: hosting-decision
-  - claim: dev-origin-needs-cors
-  - claim: sveltekit-adapter-in-vite-config
-  - constraint: q3-timeline
+  - episode: deploy-to-production
 
 ## Proposed
 
@@ -50,6 +42,17 @@ projection: task-planning
   - episode: implement-dashboard
 
 ## Done
+
+### Deploy to Cloudflare Pages + Railway
+
+- id: deploy-stack
+- status: done
+- why: The dashboard and API are now publicly reachable for the portfolio.
+- related memory:
+  - episode: deploy-to-production
+  - transition: deploy-to-production
+  - decision: hosting-decision
+  - claim: sveltekit-cloudflare-needs-nodejs-compat
 
 ### Normalize skills
 

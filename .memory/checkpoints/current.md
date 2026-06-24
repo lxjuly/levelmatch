@@ -11,7 +11,12 @@ episode: implement-dashboard
 
 ## Focus
 
-Dashboard shipped and skills normalized. Next: deploy or extended aggregates.
+Deployed live. Next: seed production data, then extended aggregates or canonical dictionary.
+
+## Live URLs
+
+- Dashboard: https://levelmatch.pages.dev (Cloudflare Pages)
+- API: https://levelmatch-api-production.up.railway.app (Railway, FastAPI + Postgres)
 
 ## Progress
 
@@ -25,22 +30,22 @@ Dashboard shipped and skills normalized. Next: deploy or extended aggregates.
 
 ## Next Action
 
-Pick from the plan's Proposed items: deploy-stack (Cloudflare Pages + Railway),
-build-market-aggregate (role trends + user-relative gaps), or canonical-skill-dictionary
-(curated product-name labels).
+Seed production data (ingest a couple of queries against the live API — costs JSearch
+quota + Claude tokens, confirm first). Then build-market-aggregate or canonical-skill-dictionary.
 
 ## Open Loops
 
+- Production DB is empty — live demo needs seeding
 - Product-name casing degraded by Title Case (claim: normalization-loses-product-casing) — canonical-skill-dictionary proposed
-- Not yet deployed (Cloudflare Pages + Railway)
-- PYTHONPATH=src workaround for alembic — could be cleaned up with a proper alembic config
+- Per-deployment Pages preview URLs aren't in CORS_ORIGINS (only the stable levelmatch.pages.dev is)
 
 ## Working Context
 
 - `src/levelmatch/` — FastAPI backend; `web/` — SvelteKit dashboard
 - Backend: `PYTHONPATH=src uv run uvicorn levelmatch.main:app --reload`
 - Frontend: `cd web && npm run dev` (Vite on :5173, expects API on :8000)
-- `PYTHONPATH=src uv run alembic upgrade head` for migrations; `docker compose up -d` for Postgres
+- `uv run alembic upgrade head` for migrations (prepend_sys_path=src); `docker compose up -d` for Postgres
+- Deploy: `railway up --service levelmatch-api`; `cd web && npm run build && npx wrangler pages deploy` (see DEPLOY.md)
 - Frontend API base set via `web/.env` PUBLIC_API_BASE
 
 ## Promotion Notes
