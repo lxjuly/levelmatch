@@ -9,7 +9,23 @@ projection: task-planning
 
 ## Active
 
-_None — dashboard shipped. Pick the next item from Proposed._
+### Deploy to Cloudflare Pages + Railway
+
+- id: deploy-stack
+- status: active
+- why: The dashboard and API need to be publicly reachable for the portfolio.
+- next action: Repo is deploy-ready (railway.toml, configurable CORS, asyncpg URL
+  rewrite, DEPLOY.md runbook). Remaining steps need account access:
+  1. Railway: create project, add Postgres plugin, set ANTHROPIC_API_KEY /
+     JSEARCH_API_KEY / CORS_ORIGINS, deploy, capture API URL
+  2. Cloudflare Pages: root `web`, build `npm run build`, output
+     `.svelte-kit/cloudflare`, set PUBLIC_API_BASE to the Railway URL
+  3. Set CORS_ORIGINS to the Pages URL on Railway, redeploy backend
+- related memory:
+  - decision: hosting-decision
+  - claim: dev-origin-needs-cors
+  - claim: sveltekit-adapter-in-vite-config
+  - constraint: q3-timeline
 
 ## Proposed
 
@@ -22,16 +38,6 @@ _None — dashboard shipped. Pick the next item from Proposed._
 - related memory:
   - claim: normalization-loses-product-casing
   - episode: implement-skill-normalization
-
-### Deploy to Cloudflare Pages + Railway
-
-- id: deploy-stack
-- status: proposed
-- why: The dashboard and API need to be publicly reachable for the portfolio.
-- next action: Deploy FastAPI + Postgres to Railway, dashboard to Cloudflare Pages, wire CORS + PUBLIC_API_BASE to production origins.
-- related memory:
-  - decision: hosting-decision
-  - constraint: q3-timeline
 
 ### Extend market aggregate view
 
