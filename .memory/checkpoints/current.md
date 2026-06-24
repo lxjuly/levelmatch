@@ -11,8 +11,8 @@ episode: implement-dashboard
 
 ## Focus
 
-Building the two-sided loop. Use case 1 (resume upload → parse → match) built locally,
-pending deploy. Next: deploy it, then use case 2 (resume-upgrade-suggestions).
+Building the two-sided loop. Use case 1 (resume upload → parse → match) is live in
+production. Next: use case 2 (resume-upgrade-suggestions).
 
 ## Live URLs
 

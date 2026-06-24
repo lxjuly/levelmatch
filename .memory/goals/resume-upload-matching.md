@@ -8,8 +8,8 @@ status: active
 
 A user uploads a resume and is matched to relevant jobs.
 
-**Status:** Implemented (committed via [[resume-parse-via-claude]]); live on next
-deploy. First slice of the loop is built.
+**Status:** Live in production (committed via [[resume-parse-via-claude]]). First
+slice of the loop is shipped — upload at https://levelmatch.pages.dev/profile.
 
 **Why:** The resume is the richest single signal of a candidate's level and skills.
 Parsing it replaces manual profile entry and feeds the existing gap analyzer with
