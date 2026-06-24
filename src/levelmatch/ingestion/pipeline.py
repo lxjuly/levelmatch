@@ -5,6 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from levelmatch.db.models import JobPosting
 from levelmatch.extraction import claude
+from levelmatch.extraction.normalize import normalize_skills
 from levelmatch.ingestion.jsearch import RawJobPosting, search_jobs
 
 
@@ -37,9 +38,9 @@ async def ingest(query: str, db: AsyncSession, num_pages: int = 1) -> dict:
             location=extracted.location,
             seniority_level=extracted.seniority_level,
             role_type=extracted.role_type,
-            required_skills=extracted.required_skills,
-            preferred_skills=extracted.preferred_skills,
-            tech_stack=extracted.tech_stack,
+            required_skills=normalize_skills(extracted.required_skills),
+            preferred_skills=normalize_skills(extracted.preferred_skills),
+            tech_stack=normalize_skills(extracted.tech_stack),
             years_experience=extracted.years_experience,
             salary_min=salary.min if salary else None,
             salary_max=salary.max if salary else None,

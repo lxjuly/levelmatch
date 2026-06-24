@@ -13,16 +13,15 @@ _None — dashboard shipped. Pick the next item from Proposed._
 
 ## Proposed
 
-### Normalize skills
+### Canonical skill dictionary
 
-- id: normalize-skills
+- id: canonical-skill-dictionary
 - status: proposed
-- why: Extraction emits skills with inconsistent casing/wording ("Machine Learning" vs "Machine learning"), which splits aggregates in the Insights view and weakens gap matching.
-- next action: Add a canonicalization pass (lowercase + alias map, or LLM-assisted) at extraction time, and/or aggregate case-insensitively.
+- why: Title-Case normalization fixes the case split but degrades camelCase product names (LangChain → Langchain). A curated alias map would give correct display labels.
+- next action: Build an alias/canonical map for common product names and apply it after normalization.
 - related memory:
-  - claim: skill-casing-splits-aggregates
-  - episode: implement-dashboard
-  - decision: llm-extraction-schema-decision
+  - claim: normalization-loses-product-casing
+  - episode: implement-skill-normalization
 
 ### Deploy to Cloudflare Pages + Railway
 
@@ -45,6 +44,16 @@ _None — dashboard shipped. Pick the next item from Proposed._
   - episode: implement-dashboard
 
 ## Done
+
+### Normalize skills
+
+- id: normalize-skills
+- status: done
+- why: Inconsistent skill casing split Insights aggregates and weakened gap matching.
+- related memory:
+  - claim: skill-casing-splits-aggregates
+  - episode: implement-skill-normalization
+  - transition: implement-skill-normalization
 
 ### Build dashboard
 

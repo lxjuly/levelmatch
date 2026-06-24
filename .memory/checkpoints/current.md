@@ -11,7 +11,7 @@ episode: implement-dashboard
 
 ## Focus
 
-Dashboard shipped. Next: skill normalization, deploy, or extended aggregates.
+Dashboard shipped and skills normalized. Next: deploy or extended aggregates.
 
 ## Progress
 
@@ -19,17 +19,19 @@ Dashboard shipped. Next: skill normalization, deploy, or extended aggregates.
 - SvelteKit dashboard built under `web/` (Svelte 5 runes, Cloudflare Pages adapter)
 - Four views: Jobs (list + match scores), Job detail (gap report), Profile, Insights (aggregates)
 - CORS enabled on the API for the SvelteKit dev origin
+- Skill normalization: canonicalization at ingest, existing rows backfilled, verified in Insights
+- First use of the Chronelle Claim primitive: 3 FE claims + 1 normalization-limitation claim
 - Verified end-to-end in a real browser against the local API (10 ingested postings)
 
 ## Next Action
 
-Pick from the plan's Proposed items: normalize-skills (canonicalize casing/wording),
-deploy-stack (Cloudflare Pages + Railway), or build-market-aggregate (role trends +
-user-relative gaps).
+Pick from the plan's Proposed items: deploy-stack (Cloudflare Pages + Railway),
+build-market-aggregate (role trends + user-relative gaps), or canonical-skill-dictionary
+(curated product-name labels).
 
 ## Open Loops
 
-- Skill normalization: "Machine Learning" vs "Machine learning" split in aggregates
+- Product-name casing degraded by Title Case (claim: normalization-loses-product-casing) — canonical-skill-dictionary proposed
 - Not yet deployed (Cloudflare Pages + Railway)
 - PYTHONPATH=src workaround for alembic — could be cleaned up with a proper alembic config
 
