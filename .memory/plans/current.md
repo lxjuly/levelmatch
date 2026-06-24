@@ -20,6 +20,7 @@ _None — dashboard shipped. Pick the next item from Proposed._
 - why: Extraction emits skills with inconsistent casing/wording ("Machine Learning" vs "Machine learning"), which splits aggregates in the Insights view and weakens gap matching.
 - next action: Add a canonicalization pass (lowercase + alias map, or LLM-assisted) at extraction time, and/or aggregate case-insensitively.
 - related memory:
+  - claim: skill-casing-splits-aggregates
   - episode: implement-dashboard
   - decision: llm-extraction-schema-decision
 

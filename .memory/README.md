@@ -6,8 +6,10 @@ LevelMatch project memory using the Chronelle ontology.
 
 ```
 .memory/
+  alternatives/    — options considered for a decision
   assumptions/     — beliefs the project relies on
   checkpoints/     — mutable working state, one per active session
+  claims/          — truth-apt propositions (unsettled/settled/refuted)
   constraints/     — boundaries on what the project can do
   decisions/       — chosen directions and their rationale
   episodes/        — bounded activities worth preserving
