@@ -11,8 +11,8 @@ episode: implement-dashboard
 
 ## Focus
 
-Deployed live with data. Vision set: the two-sided job-seeking loop (5 proposed use-case Goals).
-Next: start use case 1 (resume-upload-matching), or polish (ingest UX, aggregates).
+Building the two-sided loop. Use case 1 (resume upload → parse → match) built locally,
+pending deploy. Next: deploy it, then use case 2 (resume-upgrade-suggestions).
 
 ## Live URLs
 

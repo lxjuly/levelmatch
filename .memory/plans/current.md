@@ -27,11 +27,14 @@ projection: task-planning
 - status: proposed
 - why: The two-sided matching loop is the product vision; the five sequenced use
   cases extend the MVP from one-shot gap analysis to a closed candidate arc.
-- next action: Start use case 1 (resume-upload-matching) — promote its proposed Goal
-  by validating its Claims and resolving its fork, then build.
+- next action: Use case 1 (resume-upload-matching) is built. Next is use case 2
+  (resume-upgrade-suggestions). Steward also wants to explore implementation
+  alternatives for the loop later (e.g. embedding-based matching vs LLM parse,
+  agentic follow-through) — capture as Alternatives when each use case begins.
 - related memory:
   - goal: two-sided-matching-loop
-  - goal: resume-upload-matching
+  - goal: resume-upgrade-suggestions
+  - episode: implement-resume-upload-matching
   - episode: define-job-loop-use-cases
 
 ### Canonical skill dictionary

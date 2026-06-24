@@ -1,12 +1,15 @@
 ---
 id: resume-upload-matching
 type: goal
-status: proposed
+status: active
 ---
 
 # Resume Upload And Job Matching
 
 A user uploads a resume and is matched to relevant jobs.
+
+**Status:** Implemented (committed via [[resume-parse-via-claude]]); live on next
+deploy. First slice of the loop is built.
 
 **Why:** The resume is the richest single signal of a candidate's level and skills.
 Parsing it replaces manual profile entry and feeds the existing gap analyzer with

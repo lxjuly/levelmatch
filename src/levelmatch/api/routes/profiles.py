@@ -1,11 +1,12 @@
 import uuid
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
 from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from levelmatch.db.models import UserProfile
 from levelmatch.db.session import get_db
+from levelmatch.resume.parse import extract_text, parse_profile
 
 router = APIRouter(prefix="/profiles", tags=["profiles"])
 
@@ -21,6 +22,26 @@ class ProfileCreate(BaseModel):
 @router.post("", status_code=201)
 async def create_profile(body: ProfileCreate, db: AsyncSession = Depends(get_db)):
     profile = UserProfile(**body.model_dump())
+    db.add(profile)
+    await db.commit()
+    await db.refresh(profile)
+    return profile
+
+
+@router.post("/from-resume", status_code=201)
+async def create_profile_from_resume(
+    file: UploadFile = File(...), db: AsyncSession = Depends(get_db)
+):
+    content = await file.read()
+    if not content:
+        raise HTTPException(status_code=400, detail="Empty file")
+
+    text = extract_text(file.filename or "", content)
+    if not text.strip():
+        raise HTTPException(status_code=422, detail="Could not extract text from the file")
+
+    parsed = parse_profile(text)
+    profile = UserProfile(**parsed.model_dump())
     db.add(profile)
     await db.commit()
     await db.refresh(profile)

@@ -12,20 +12,44 @@
 	let error = $state('');
 	let loaded = $state(null);
 
+	let resumeFile = $state(null);
+	let parsing = $state(false);
+	let parsedNote = $state('');
+
 	const levels = ['junior', 'mid', 'senior', 'staff', 'principal'];
+
+	function populate(p) {
+		loaded = p;
+		name = p.name ?? '';
+		skillsText = (p.skills ?? []).join(', ');
+		yearsExperience = p.years_experience ?? '';
+		currentLevel = p.current_level ?? 'mid';
+		targetRolesText = (p.target_roles ?? []).join(', ');
+	}
 
 	async function loadExisting() {
 		if (!activeProfile.id) return;
 		try {
-			const p = await api.getProfile(activeProfile.id);
-			loaded = p;
-			name = p.name;
-			skillsText = (p.skills ?? []).join(', ');
-			yearsExperience = p.years_experience ?? '';
-			currentLevel = p.current_level ?? 'mid';
-			targetRolesText = (p.target_roles ?? []).join(', ');
+			populate(await api.getProfile(activeProfile.id));
 		} catch (e) {
 			error = e.message;
+		}
+	}
+
+	async function uploadResume() {
+		if (!resumeFile) return;
+		parsing = true;
+		error = '';
+		parsedNote = '';
+		try {
+			const profile = await api.createProfileFromResume(resumeFile);
+			setActiveProfile(profile.id);
+			populate(profile);
+			parsedNote = `Parsed "${resumeFile.name}" — review below, then see your matches on Jobs.`;
+		} catch (e) {
+			error = e.message;
+		} finally {
+			parsing = false;
 		}
 	}
 
@@ -76,6 +100,26 @@
 	LevelMatch compares this profile against each job posting to compute your match.
 </p>
 
+<div class="upload">
+	<div class="upload-head">
+		<strong>Upload a resume</strong>
+		<span class="muted">PDF or text — we parse it into your profile</span>
+	</div>
+	<div class="upload-row">
+		<input
+			type="file"
+			accept=".pdf,.txt,.md,text/plain,application/pdf"
+			onchange={(e) => (resumeFile = e.currentTarget.files?.[0] ?? null)}
+		/>
+		<button onclick={uploadResume} disabled={!resumeFile || parsing}>
+			{parsing ? 'Parsing…' : 'Parse resume'}
+		</button>
+	</div>
+	{#if parsedNote}<p class="ok">{parsedNote}</p>{/if}
+</div>
+
+<p class="divider"><span>or edit manually</span></p>
+
 <div class="form">
 	<label>
 		Name
@@ -122,6 +166,43 @@
 </div>
 
 <style>
+	.upload {
+		max-width: 540px;
+		margin-top: 1.5rem;
+		padding: 1rem 1.25rem;
+		background: #161b22;
+		border: 1px solid #30363d;
+		border-radius: 10px;
+	}
+	.upload-head {
+		display: flex;
+		flex-direction: column;
+		gap: 0.15rem;
+		margin-bottom: 0.75rem;
+	}
+	.upload-row {
+		display: flex;
+		gap: 0.75rem;
+		align-items: center;
+	}
+	.upload-row input[type='file'] {
+		flex: 1;
+		font-size: 0.85rem;
+		color: #c9d1d9;
+	}
+	.divider {
+		max-width: 540px;
+		text-align: center;
+		border-bottom: 1px solid #21262d;
+		line-height: 0.1em;
+		margin: 1.75rem 0 0.5rem;
+	}
+	.divider span {
+		background: #0d1117;
+		padding: 0 0.75rem;
+		color: #8b949e;
+		font-size: 0.85rem;
+	}
 	.form {
 		display: flex;
 		flex-direction: column;
