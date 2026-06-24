@@ -21,6 +21,19 @@ projection: task-planning
 
 ## Proposed
 
+### Build the job-seeking loop (use cases 1–5)
+
+- id: build-job-loop
+- status: proposed
+- why: The two-sided matching loop is the product vision; the five sequenced use
+  cases extend the MVP from one-shot gap analysis to a closed candidate arc.
+- next action: Start use case 1 (resume-upload-matching) — promote its proposed Goal
+  by validating its Claims and resolving its fork, then build.
+- related memory:
+  - goal: two-sided-matching-loop
+  - goal: resume-upload-matching
+  - episode: define-job-loop-use-cases
+
 ### Canonical skill dictionary
 
 - id: canonical-skill-dictionary

@@ -11,7 +11,8 @@ episode: implement-dashboard
 
 ## Focus
 
-Deployed live. Next: seed production data, then extended aggregates or canonical dictionary.
+Deployed live with data. Vision set: the two-sided job-seeking loop (5 proposed use-case Goals).
+Next: start use case 1 (resume-upload-matching), or polish (ingest UX, aggregates).
 
 ## Live URLs
 
